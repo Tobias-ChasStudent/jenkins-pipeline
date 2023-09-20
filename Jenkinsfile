@@ -7,9 +7,6 @@ pipeline {
     tools {
         nodejs 'NodeJS' // Specify the Node.js installation name you configured
     }
-    environment {
-        MY_CREDENTIAL = credentials('3c64daa6-e7c9-4527-ac6b-384c63712780') // Use the actual credential ID here
-    }
     
     stages {
         
@@ -43,13 +40,7 @@ pipeline {
                     sh """
                         git remote -v
 
-                        echo "Using credentials..."
-                        echo "Username: \$MY_CREDENTIAL_USR"
-                        echo "Password: \$MY_CREDENTIAL_PSW"
-                        
                         git checkout production
-
-                        git config --global credential.username Tobias-ChasStudent
                         
                         git merge origin/main
 
