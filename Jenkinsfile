@@ -47,9 +47,10 @@ pipeline {
             sh 'git config --global credential.useHttpPath true'
 
              script {
-            // Retrieve the secret variable and assign it to an environment variable
-            def secretValue = credentials('YourCredentialIdHere').password
-            env.PASSWORD_GIT = secretValue
+                 echo 'Setting environment variable'
+                // Retrieve the secret variable and assign it to an environment variable
+                def secretValue = credentials('YourCredentialIdHere').password
+                env.PASSWORD_GIT = secretValue
             }
             
             // Create temporary Git credentials file
