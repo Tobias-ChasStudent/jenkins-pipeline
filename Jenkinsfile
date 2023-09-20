@@ -38,6 +38,8 @@ pipeline {
                     echo "Entering script portion"
 
                     sh """
+                        git remote -v
+                    
                         git checkout production
 
                         git config --global credential.username Tobias-ChasStudent
