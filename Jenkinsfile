@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 // Assuming you have the credentials set up in Jenkins as 'github-credentials'
-                withCredentials([usernamePassword(credentialsId: 'github-credentials-emelie', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: '3c64daa6-e7c9-4527-ac6b-384c63712780', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 // Checkout production branch
                 sh 'git checkout production'
                 // Merge changes from the branch you tested on.
