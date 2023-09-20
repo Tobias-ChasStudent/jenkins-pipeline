@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        // Bind the credentials to environment variables
-        GIT_CREDENTIALS = credentials('3c64daa6-e7c9-4527-ac6b-384c63712780')
-    }
     triggers {
         githubPush() // This will listen for GitHub push events
     }
@@ -40,19 +36,11 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     echo "Entering script portion"
-                    echo "Git Credentials: ${env.GIT_CREDENTIALS.username}" // Debugging output
-                    echo "Git Password: ${env.GIT_CREDENTIALS.password}"     // Debugging output
-                    echo "Current Directory: ${pwd()}"                 // Debugging output
 
                     sh """
                         git checkout production
         
                         git merge origin/main
-                
-                        git config --global credential.helper store
-                        git config --global credential.useHttpPath true
-
-                        echo "https://${env.GIT_CREDENTIALS.username}:${env.GIT_CREDENTIALS.password}@github.com" > .git/credentials
 
                         git push origin production
 
