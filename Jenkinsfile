@@ -47,7 +47,7 @@ pipeline {
 
             //Asign GIT_PASSWORD to a env variable
             env.PASSWORD_GIT = ${GIT_PASSWORD}
-            sh "echo 'My secret env varaible: \$SECRET_ENV_VARIABLE'"
+            echo 'My secret env varaible: \$SECRET_ENV_VARIABLE'
             // Create temporary Git credentials file
             sh "echo 'https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com' > .git/credentials"
 
