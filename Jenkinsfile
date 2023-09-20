@@ -40,9 +40,8 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     echo "Entering script portion"
-                    def gitCredentials = env.GIT_CREDENTIALS
-                    echo "Git Credentials: ${gitCredentials.username}" // Debugging output
-                    echo "Git Password: ${gitCredentials.password}"     // Debugging output
+                    echo "Git Credentials: ${env.GIT_CREDENTIALS.username}" // Debugging output
+                    echo "Git Password: ${env.GIT_CREDENTIALS.password}"     // Debugging output
                     echo "Current Directory: ${pwd()}"                 // Debugging output
 
                     sh """
@@ -53,7 +52,7 @@ pipeline {
                         git config --global credential.helper store
                         git config --global credential.useHttpPath true
 
-                        echo "https://${gitCredentials.username}:${gitCredentials.password}@github.com" > .git/credentials
+                        echo "https://${env.GIT_CREDENTIALS.username}:${env.GIT_CREDENTIALS.password}@github.com" > .git/credentials
 
                         git push origin production
 
