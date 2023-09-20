@@ -45,7 +45,7 @@ pipeline {
             sh 'git config --global credential.helper store'
             sh 'git config --global credential.useHttpPath true'
             // Create temporary Git credentials file
-            sh "echo 'https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com' > .git/credentials"
+            sh "echo 'https://$GIT_USERNAME:$GIT_PASSWORD@github.com' > .git/credentials"
 
             // Check credentials
             echo "GIT_USERNAME: ${GIT_USERNAME}"
