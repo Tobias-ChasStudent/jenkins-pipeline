@@ -40,7 +40,7 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     echo "Entering script portion"
-                    echo "Git Credentials: $env.GIT_CREDENTIALS.username" // Debugging output
+                    echo "Git Credentials: ${env.GIT_CREDENTIALS.username}" // Debugging output
                     echo "Git Password: ${env.GIT_CREDENTIALS.password}"     // Debugging output
                     echo "Current Directory: ${pwd()}"                 // Debugging output
 
