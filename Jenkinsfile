@@ -33,6 +33,7 @@ pipeline {
         stage('Deploy') {
     steps {
         echo 'Deploying....'
+        
         // Assuming you have the credentials set up in Jenkins as 'github-credentials'
         withCredentials([usernamePassword(credentialsId: '3c64daa6-e7c9-4527-ac6b-384c63712780', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             // Checkout production branch
@@ -45,6 +46,11 @@ pipeline {
             sh 'git config --global credential.useHttpPath true'
             // Create temporary Git credentials file
             sh "echo 'https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com' > .git/credentials"
+
+            // Check credentials
+            echo "GIT_USERNAME: ${GIT_USERNAME}"
+            echo "GIT_PASSWORD: ${GIT_PASSWORD}"
+            
             // Push to production branch
             sh 'git push origin production'
             // Remove temporary Git credentials file
