@@ -51,7 +51,7 @@ pipeline {
                 echo 'Setting environment variable'
                 def secretValue = credentials('YourCredentialIdHere').password
                 env.PASSWORD_GIT = secretValue
-                echo env.PASSWORD_GIT
+                echo "$env.PASSWORD_GIT"
             }
             
             // Create temporary Git credentials file
