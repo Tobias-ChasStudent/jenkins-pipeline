@@ -53,7 +53,7 @@ pipeline {
 
             // Check credentials
             echo "GIT_USERNAME: ${GIT_USERNAME}"
-            echo "GIT_PASSWORD: $env.PASSWORD_GIT"
+            echo "GIT_PASSWORD: ${GIT_PASSWORD}"
             
             // Push to production branch
             sh 'git push origin production'
