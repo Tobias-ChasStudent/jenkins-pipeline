@@ -40,7 +40,7 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     echo "Entering script portion"
-                    String gitCredentials = env.GIT_CREDENTIALS
+                    def gitCredentials = env.GIT_CREDENTIALS
                     echo "Git Credentials: ${gitCredentials.username}" // Debugging output
                     echo "Git Password: ${gitCredentials.password}"     // Debugging output
                     echo "Current Directory: ${pwd()}"                 // Debugging output
