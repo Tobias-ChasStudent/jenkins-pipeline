@@ -46,7 +46,7 @@ pipeline {
             sh 'git config --global credential.useHttpPath true'
 
             //Asign GIT_PASSWORD to a env variable
-            env.PASSWORD_GIT = ${GIT_PASSWORD}
+            env.PASSWORD_GIT = GIT_PASSWORD
             echo 'My secret env varaible: \$SECRET_ENV_VARIABLE'
             // Create temporary Git credentials file
             sh "echo 'https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com' > .git/credentials"
