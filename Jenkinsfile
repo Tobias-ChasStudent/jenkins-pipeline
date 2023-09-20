@@ -39,7 +39,9 @@ pipeline {
 
                     sh """
                         git checkout production
-        
+
+                        git config --global credential.username Tobias-ChasStudent
+                        
                         git merge origin/main
 
                         git push origin production
