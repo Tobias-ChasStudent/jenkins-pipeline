@@ -31,24 +31,27 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-                // Assuming you have the credentials set up in Jenkins as 'github-credentials'
-                withCredentials([usernamePassword(credentialsId: '3c64daa6-e7c9-4527-ac6b-384c63712780', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                // Checkout production branch
-                sh 'git checkout production'
-                // Merge changes from the branch you tested on.
-                // NOTE: If you don't want to merge, and you're sure the branch you tested is what you want in production, you can skip this step.
-                sh 'git merge origin/main'
-                // Push to production branch
-                sh """
-                git config --global credential.helper 'store --file=.git/credentials'
-                echo "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com" > .git/credentials
-                git push origin production
-                rm .git/credentials
-                """
-                }
-            }
+    steps {
+        echo 'Deploying....'
+        // Assuming you have the credentials set up in Jenkins as 'github-credentials'
+        withCredentials([usernamePassword(credentialsId: '3c64daa6-e7c9-4527-ac6b-384c63712780', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+            // Checkout production branch
+            sh 'git checkout production'
+            // Merge changes from the branch you tested on.
+            // NOTE: If you don't want to merge, and you're sure the branch you tested is what you want in production, you can skip this step.
+            sh 'git merge origin/main'
+            // Configure Git credential helper
+            sh 'git config --global credential.helper store'
+            sh 'git config --global credential.useHttpPath true'
+            // Create temporary Git credentials file
+            sh "echo 'https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com' > .git/credentials"
+            // Push to production branch
+            sh 'git push origin production'
+            // Remove temporary Git credentials file
+            sh 'rm .git/credentials'
         }
+    }
+}
+
     }
 }
